@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KohiManju | Login
+    </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-amber-100 flex items-center justify-center h-screen">
+    <div id="log-in-container" class="flex flex-col max-w-md rounded-lg shadow-lg bg-white p-6">
+        <h1>Login</h1>
+        <form method="post" id="login-form" action="/src/controllers/login-process.php">
+            <label for="employee-id">Employee ID</label><br>
+            <input type="number" name="employee-id" id="employee-id" placeholder="Employee ID" required><br>
+            <label for="password">Password</label><br>
+            <input type="password" name="password" id="password" placeholder="Password" required><br>
+            <button type="submit" id="login-button">Login</button><br>
+            <p id="error-message" class="hidden">Invalid credentials. Please try again.</p>
+        </form>
+    </div>
+</body>
+<script src="js/login.js"></script>
+</html>
