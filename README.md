@@ -33,8 +33,10 @@ This is a comprehensive Point-of-Sale (POS) web application designed for busines
 The system uses robust database management for efficient data handling, with the following key tables:
 
 1. **Users Table**
-   - Contains employee details like `id`, `name`, `age`, `gender`, `employee_type`, `password`, and `date_hired`.
-   - Includes role-based `user_access_level`.
+   - Contains employee details like `employee_id`, `password`, `name`, `birth_date`, `gender`, `email`, `contact_number`, `address`, `hire_date`, `is_active`, `salary`, `employee_type` - [manager, staff].
+   - Manager details include: `manager_id` and `bonus_percentage`.
+   - Staff details include: `staff_id` and `manager_id`.
+   - Includes role-based `user_access_level` based off of `employee_type`.
 
 2. **Inventory Table**
    - Tracks product details like `product_id`, `name`, `stock_quantity`, `price`, and `last_updated`.
