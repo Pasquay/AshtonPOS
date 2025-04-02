@@ -20,8 +20,6 @@
         </form>
     </div>
 </body>
-<script src="js/login.js">
-</script>
 </html>
 
 <?php

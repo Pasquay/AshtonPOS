@@ -9,7 +9,7 @@ This is a comprehensive Point-of-Sale (POS) web application designed for busines
 - Passwords are securely hashed for added security.
 
 ### 2. Role-Based Access Control
-- Different access levels for `Manager`, `Owner`, and `Employee`.
+- Different access levels for `Manager` and `Employee`.
 - Feature access is restricted based on user roles to ensure data security.
 
 ### 3. POS Transaction System
@@ -28,6 +28,10 @@ This is a comprehensive Point-of-Sale (POS) web application designed for busines
 - Log employee attendance in real-time.
 - Track shifts and verify if they are complete or incomplete.
 - Helps ensure proper employee shift allocation.
+
+### 7. Sales & Employee Statistics
+- Statistics for insightful sales and employee data.
+- Displayed in easy to understand graphs.
 
 ## Database Structure
 The system uses robust database management for efficient data handling, with the following key tables:
