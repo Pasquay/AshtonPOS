@@ -1,16 +1,18 @@
-<?php session_start() ?>
+<?php 
+session_start(); 
+$employeeType = $_SESSION['employee_type'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="flex flex-row bg-gray-100 h-100%">
     <nav class="flex flex-col bg-white h-screen w-16 p-2 shadow-lg">
         <img src="icons/logo.png" alt="logo" class="mx-auto mt-2 mb-4 w-9 h-auto object-contain">
-
         <div id="nav-top-buttons" class="space-y-2">
             <button id="nav-button-home" class="cursor-pointer w-full flex justify-center items-center p-2 rounded-md">
                 <img src="icons/home.png" alt="Home" class="w-6 h-6 transition-transform duration-200 hover:scale-110">
@@ -24,7 +26,7 @@
             <button id="nav-button-inventory" class="cursor-pointer w-full flex justify-center items-center p-2 rounded-lg">
                 <img src="icons/inventory.png" alt="Inventory" class="w-6 h-6 transition-transform duration-200 hover:scale-110">
             </button>
-            <button id="nav-button-employees" class="cursor-pointer w-full flex justify-center items-center p-2 rounded-lg">
+            <button id="nav-button-employees" class="<?php if($employeeType === "Staff") echo "hidden"; ?> cursor-pointer w-full flex justify-center items-center p-2 rounded-lg">
                 <img src="icons/employees.png" alt="Employees" class="w-6 h-6 transition-transform duration-200 hover:scale-110">
             </button>
             <button id="nav-button-attendance" class="cursor-pointer w-full flex justify-center items-center p-2 rounded-lg">

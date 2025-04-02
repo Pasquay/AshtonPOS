@@ -1,11 +1,11 @@
 //nav button functional
 document.addEventListener("DOMContentLoaded", () => {
-    loadContent('home');
+    // loadContent('home'); //home by default, change it when youre testing smth
 
     //default 1st active button is home
-    let activeButton = document.getElementById('nav-button-home');
-    const homeImage = activeButton.querySelector('img');
-    homeImage.src = homeImage.src.replace('.png', '-alt.png');
+    // let activeButton = document.getElementById('nav-button-pos');
+    // const activeImage = activeButton.querySelector('img');
+    // activeImage.src = activeImage.src.replace('.png', '-alt.png');
     
     //loads the button's section and updates button image
     document.querySelectorAll('[id^="nav-button-"]:not(#nav-button-logout)').forEach((button) => {

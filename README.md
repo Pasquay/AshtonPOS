@@ -58,3 +58,10 @@ The system uses robust database management for efficient data handling, with the
 1. **Clone the Repository**:
    ```bash
    git clone <repository-url>
+2. **Initialize Databases**:
+   a. `init-db.sql`
+   b. employees `schema.sql` -> `initial-data.sql`
+   c. attendance log `schema.sql` -> `initial-data.sql`
+   d. transactions `schema.sql` -> `initial-data.sql`
+   e. inventory `schema.sql` -> `initial-data.sql`
+   f. `user-permissions.sql`

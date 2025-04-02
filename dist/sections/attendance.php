@@ -1,3 +1,3 @@
 <?php
-echo "Attendance page";
+echo "<p class=>Attendance page</p>";
 ?>

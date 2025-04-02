@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
     hire_date DATE NOT NULL,
     is_active TINYINT(1) DEFAULT 1,
     salary DECIMAL(10, 2) NOT NULL,
-    employee_type ENUM('Manager', 'Staff') NOT NULL
+    employee_type ENUM('Owner', 'Manager', 'Staff') NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS `managers` (
