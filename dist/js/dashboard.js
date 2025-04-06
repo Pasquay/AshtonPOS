@@ -1,11 +1,14 @@
-//nav button functional
+//onload
+    // loads home
+    // nav button functions
+    // 
 document.addEventListener("DOMContentLoaded", () => {
-    // loadContent('home'); //home by default, change it when youre testing smth
+    loadContent('home'); //home by default, change it when youre testing smth
 
-    //default 1st active button is home
-    // let activeButton = document.getElementById('nav-button-pos');
-    // const activeImage = activeButton.querySelector('img');
-    // activeImage.src = activeImage.src.replace('.png', '-alt.png');
+    // default 1st active button is home
+    let activeButton = document.getElementById('nav-button-home');
+    const activeImage = activeButton.querySelector('img');
+    activeImage.src = activeImage.src.replace('.png', '-alt.png');
     
     //loads the button's section and updates button image
     document.querySelectorAll('[id^="nav-button-"]:not(#nav-button-logout)').forEach((button) => {
@@ -45,10 +48,52 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(() => {
                 window.location.href = "login.php";
             });
-    });
+    });    
 });
 
 
+//Employee vsection button functions
+let activeViewButton = null;
+
+function attachEmployeeButtonListeners(){
+    document.querySelectorAll('[id^="view-button-"]').forEach((button) => {
+        button.dataset.state = "off";
+        button.addEventListener("click", () => {
+            const image = button.querySelector('img');
+            if(button.dataset.state === "off"){
+                if(activeViewButton){
+                    const activeImage = activeViewButton.querySelector('img');
+                    activeImage.src = activeImage.src.replace("-alt.png", ".png");
+                }
+                image.src = image.src.replace(".png", "-alt.png");
+                button.dataset.state = "on";
+                activeViewButton = button;
+            } else {
+                image.src = image.src.replace("-alt.png", ".png");
+                button.dataset.state = "off";
+            }
+        })
+        // const employeeId = button.id.split('-').pop()
+        // loadEmployeeInformation(employeeId);
+    })
+
+    document.querySelectorAll('[id^="delete-button-"]').forEach((button) => {
+        button.dataset.state = "off";
+        button.addEventListener("click", () => {
+            const image = button.querySelector('img');
+            if(button.dataset.state === "off"){
+                image.src = image.src.replace(".png", "-alt.png");
+                button.dataset.state = "on";
+            } else {
+                image.src = image.src.replace("-alt.png", ".png");
+                button.dataset.state = "off";
+            }
+        })
+    })
+}
+
+
+//Load Main Page Content
 function loadContent(content) {
     const contentContainer = document.getElementById('content-container');
     //loading indicator
@@ -58,11 +103,31 @@ function loadContent(content) {
     $.ajax({
         url: `sections/${content}.php`,
         method: "GET",
-        success: function(response){
+        success: function(response) {
+            console.log("Response:", response); // Debug the response
             contentContainer.innerHTML = response;
+            switch(content){
+                case 'home':
+                case 'employees':
+                    attachEmployeeButtonListeners();
+                    break;
+            }
         },
-        error: function(){
+        error: function(xhr, status, error) {
+            console.error("Error loading content:", error); // Debug the error
             contentContainer.innerHTML = "<p>Error loading content.</p>";
         }
     });
+}
+
+//Loads Employee Information Card
+function loadEmployeeInformation(){
+    const employeeInfoCard = document.getElementById('employee-information');
+    //if no active, show card
+    if(employeeInfoCard.classList.contains("hidden")){
+        employeeInfoCard.classList.remove("hidden");
+    }
+    //else if activeId != pressedId then update the card
+    //if activeId == pressedId then hide the card
+    //else hide the card
 }

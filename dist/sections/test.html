@@ -1,0 +1,35 @@
+<div class='flex flex-col w-full'>
+    <h1 class='font-medium p-2 mx-4'>Managers</h1>
+    <div class='bg-white shadow-lg p-4 mx-4'>
+        <table class='border border-amber-500 bg-white w-full'>
+            <thead class='border-amber-500 border bg-amber-500 w-full'>
+                <tr>
+                    <th class='text-white text-center py-1 px-0.5'>ID</th>
+                    <th class='text-white text-left py-1 pl-1 w-2/10'>Name</th>
+                    <th class='text-white text-center py-1 w-1/12'>Gender</th>
+                    <th class='text-white text-left py-1 pl-2'>Email</th>
+                    <th class='text-white text-right py-1 pr-3 w-2/12'>Contact No.</th>
+                    <th class='text-white text-right w-36 pr-6'>Salary (PHP)</th>
+                    <th class='text-white text-center w-20'>Bonus %</th>
+                    <th class='text-white text-center w-24'>Active</th>
+                    <th class='text-white text-center w-20'>Actions</th>
+                </tr>
+            </thead>
+            <tbody><tr>
+                <td class='text-center py-1'>$employeeId</td>
+                <td class='text-left py-1 pl-2'>$name</td>
+                <td class='text-center py-1'><span class='$genderClass'>$gender</span></td>
+                <td class='text-left py-1 pl-1'>$email</td>
+                <td class='text-right py-1 pr-3'>$formattedNumber</td>
+                <td class='text-right pr-6'>₱ $formattedSalary</td>
+                <td class='text-center py-1'>$formattedBonusPercentage%</td>
+                <td class='text-center py-1'><span class='$isActiveClass'>$isActive</span></td>
+                <td class='flex justify-end items-center pr-1.5'>
+                    <button id='view-button-$employeeId' class='mx-1 my-1.5 cursor-pointer'><img src='icons/view.png' alt='View' class='h-5 w-auto transition-transform duration-200 hover:scale-110' alt='Expand'></button>
+                    <button id='delete-button-$employeeId' class='mx-1 mr-2 cursor-pointer'><img src='icons/delete.png' alt='Delete' class='h-5 w-auto transition-transform duration-200 hover:scale-110' alt='Delete'></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

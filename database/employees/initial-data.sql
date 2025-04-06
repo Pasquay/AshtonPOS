@@ -1,12 +1,11 @@
-/*
-INITIAL PASSWORDS:
-    - manager1pass
-    - manager2pass
-    - staff1pass
-    - staff2pass
-    - staff3pass
-*/
+-- INITIAL PASSWORDS:
+    -- manager1pass
+    -- manager2pass
+    -- staff1pass
+    -- staff2pass
+    -- staff3pass
 
+-- insert into employees table
 INSERT INTO `employees` (password, name, birth_date, gender, email, contact_number, address, hire_date, salary, employee_type)
 VALUES
     ('$2y$10$kTApf6IClonMK.4zVX.GYuvUWg4KeVge7wUxpMxXPN5UiQts5P5Zq', 'Owner', '1995', 'Male', 'company.owner@company.com', '09678901234', '303 Owner St.', '2025-3-31', 100000.00, 'Owner'),
@@ -16,13 +15,28 @@ VALUES
     ('$2y$10$m4sbxtkaEMXz6GjSFaOgZeIpHw.LvNxs7l8Wg92yuDHHFavSAkQ.W', 'Dana Staff', '1990-03-28', 'Female', 'dana.staff@company.com', '09456789012', '101 Staff Rd.', '2025-04-02', 32000.00, 'Staff'),
     ('$2y$10$8i7MXhp49euzz.5xbZf5kebJWVcH6OlRJovWW15t9t.ccIo9V/qgO', 'Eve Staff', '1998-07-04', 'Non-Binary', 'eve.staff@company.com', '09567890123', '202 Staff Cir.', '2025-04-02', 31000.00, 'Staff');
 
+-- insert into managers table
 INSERT INTO `managers` (manager_id, bonus_percentage)
 VALUES
-    (1, 0.10),
-    (2, 0.08);
+    (2, 0.10),
+    (3, 0.08);
 
+-- insert into staff table
 INSERT INTO `staff` (staff_id, manager_id)
 VALUES
     (3, 1),
     (4, 1),
     (5, 2);
+
+-- insert into manager_payroll table (salary is fetched from employees and is paid == 0)
+INSERT INTO `manager_payroll` (manager_id)
+VALUES
+    (2),
+    (3);
+
+-- insert into staff_payroll table (salary is fetched from employees and is paid == 0)
+INSERT INTO `staff_payroll` (staff_id)
+VALUES
+    (4),
+    (5),
+    (6);
