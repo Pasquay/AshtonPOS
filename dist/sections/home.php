@@ -7,14 +7,12 @@ session_start();
             $username = "owner";
             $password = "owner_password";
             $dbname = "pos_system";
-            $table = "employees";
             break;
         case 'Manager':
             $host = "localhost";
             $username = "manager";
             $password = "manager_password";
             $dbname = "pos_system";
-            $table = "employees";
             break;
         default:
             header("Location: dist/dashboard.php");
@@ -89,6 +87,7 @@ if($_SESSION['employee_type'] === 'Owner'){
                 $address = $row['address'];
                 $hireDate = $row['hire_date'];
                 $isActive = $row['is_active'];
+                $position = 'Manager';
                 $salary = $row['salary'];
                 $bonusPercentage = $row['bonus_percentage'];
             //formatting variables
@@ -133,7 +132,7 @@ if($_SESSION['employee_type'] === 'Owner'){
                 <td class='text-center py-1'>$formattedBonusPercentage%</td>
                 <td class='text-center py-1'><span class='$isActiveClass'>$formattedIsActive</span></td>
                 <td class='flex justify-end items-center pr-1.5'>
-                    <button id='view-button-$employeeId' class='mx-1 my-1.5 cursor-pointer'><img src='icons/view.png' alt='View' class='h-5 w-auto transition-transform duration-200 hover:scale-110' alt='Expand'></button>
+                    <button id='view-button-$employeeId-$position' class='mx-1 my-1.5 cursor-pointer'><img src='icons/view.png' alt='View' class='h-5 w-auto transition-transform duration-200 hover:scale-110' alt='Expand'></button>
                     <button id='delete-button-$employeeId' class='mx-1 mr-2 cursor-pointer'><img src='icons/delete.png' alt='Delete' class='h-5 w-auto transition-transform duration-200 hover:scale-110' alt='Delete'></button>
                 </td>
                 </tr>";
@@ -201,6 +200,7 @@ if($result->num_rows > 0){
             $address = $row['address'];
             $hireDate = $row['hire_date'];
             $isActive = $row['is_active'];
+            $position = 'Staff';
             $salary = $row['salary'];
             $managerId = $row['manager_id'];
         //formatting variables
@@ -244,7 +244,7 @@ if($result->num_rows > 0){
                 <td class='text-center py-1'>$managerId</td>
                 <td class='text-center py-1'><span class='$isActiveClass'>$formattedIsActive</span></td>
                 <td class='flex justify-end items-center pr-1.5'>
-                    <button id='view-button-$employeeId' class='mx-1 my-1.5 cursor-pointer'><img src='icons/view.png' alt='View' class='h-5 w-auto transition-transform duration-200 hover:scale-110' alt='Expand'></button>
+                    <button id='view-button-$employeeId-$position' class='mx-1 my-1.5 cursor-pointer'><img src='icons/view.png' alt='View' class='h-5 w-auto transition-transform duration-200 hover:scale-110' alt='Expand'></button>
                     <button id='delete-button-$employeeId' class='mx-1 mr-2 cursor-pointer'><img src='icons/delete.png' alt='Delete' class='h-5 w-auto transition-transform duration-200 hover:scale-110' alt='Delete'></button>
                 </td>
                 </tr>";
@@ -253,30 +253,30 @@ if($result->num_rows > 0){
 
     //employee information
     echo "<div id='employee-information' class='hidden bg-white p-4 shadow-lg w-1/2 mr-4'>
+    <form id='employee-info-form' action='../src/controllers/update-employee-info.php' method='POST'>
         <div id='header-info' class='flex'>
-            <img src='images/user-image-placeholder.png' alt='Profile Picture' class='w-24 h-24 rounded-full'>
-            <div id='header-details-name' class='w-full ml-4 mt-2'>
-                <p class='text-md my-1 font-semibold'>Name</p>
+            <div id='header-details-name' class='w-full'>
+                <p class='text-md font-semibold'>Name</p>
                 <input type='text' id='name-details-input' name='name-details-input' value='FirstName M.I. LastName' class='my-1 px-3 py-2 w-full border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
             </div>
         </div>
 
         <div id='general-details' class='flex flex-col w-full'>
-            <h2 class='text-lg font-semibold mt-3'>General Details:</h2>
+            <h2 class='text-lg font-semibold mt-2 my-1'>General Details:</h2>
             <div id='general-details-top' class='flex'>
                 <div id='employeeID-general-details' class='w-18'>
-                    <p class='text-md my-1'>ID #</p>
+                    <p class='text-md'>ID #</p>
                     <input type='number' id='employeeId-details-input' name='employeeId-details-input' value='10' class='w-full my-1 px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
                 </div>
                 <div id='position-general-details' class='w-40 ml-2 mr-1'>
-                    <p class='text-md my-1'>Position</p>
+                    <p class='text-md'>Position</p>
                     <select id='position-details-input' name='position-details-input' class='w-full my-1 px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
                         <option value='Manager'>Manager</option>
-                        <option value='Employee'>Employee</option>
+                        <option value='Staff'>Staff</option>
                     </select>
                 </div>
                 <div id='gender-general-details' class='w-24 ml-1 mr-2'>
-                    <p class='text-md my-1'>Gender:</p>
+                    <p class='text-md'>Gender:</p>
                     <select id='gender-details-input' name='gender-details-input' class='w-full my-1 px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
                         <option value='Male'>Male</option>
                         <option value='Female'>Female</option>
@@ -284,8 +284,8 @@ if($result->num_rows > 0){
                     </select>
                 </div>
                 <div id='isActive-general-details' class='w-22'>
-                    <p class='text-md my-1'>Active</p>
-                    <select name='isActive-details-input' class='w-full my-1 px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
+                    <p class='text-md'>Active</p>
+                    <select id='isActive-details-input' name='isActive-details-input' class='w-full my-1 px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
                         <option value='1'>TRUE</option>
                         <option value='0'>FALSE</option>
                     </select>
@@ -293,59 +293,52 @@ if($result->num_rows > 0){
             </div>
             <div id='general-details-middle' class='flex flex-col'>
                 <div id='address-general-details' class='w-full'>
-                    <p class='text-md my-1'>Address:</p>
+                    <p class='text-md'>Address:</p>
                     <input type='text' id='address-details-input' name='address-details-input' value='M.d Echavez street, Lot 123' class='my-1 px-3 py-2 w-full border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
                 </div>
                 <div id='email-general-details' class='w-full'>
-                    <p class='text-md my-1'>Email:</p>
+                    <p class='text-md'>Email:</p>
                     <input type='email' id='email-details-input' name='email-details-input' value='business.email@company.com' class='my-1 px-3 py-2 w-full border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
                 </div>
             </div>
             <div id='general-details-bottom' class='flex'>
                 <div id='birthDate-general-details' class='w-1/2 mr-2'>
-                    <p class='text-md my-1'>Birth Date:</p>
+                    <p class='text-md'>Birth Date:</p>
                     <input type='date' id='birthDate-details-input' name='birthDate-details-input' value='2005-05-19' class='my-1 px-3 py-2 w-full border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
                 </div>
                 <div id='contactNumber-general-details' class='w-1/2 ml-2'>
-                    <p class='text-md my-1'>Contact Number:</p>
+                    <p class='text-md'>Contact Number:</p>
                     <input type='tel' id='contactNumber-details-input' name='contactNumber-details-input' value='0987-654-3210' class='my-1 px-3 py-2 w-full border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
                 </div>
             </div>
 
             <div id='employment-details' class='flex flex-col w-full'>
-                <h2 class='text-lg font-semibold mt-3'>Employment Details:</h2>
+                <h2 class='text-lg font-semibold mt-2 mb-1'>Employment Details:</h2>
                 <div id='employment-details-top' class='flex'>
                     <div id='hireDate-employment-details' class='w-1/2 mr-2'>
-                        <p class='text-md my-1'>Hire Date:</p>
+                        <p class='text-md'>Hire Date:</p>
                         <input type='date' id='hireDate-details-input' name='hireDate-details-input'  value='2005-05-19' class='my-1 px-3 py-2 w-full border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
                     </div>
                     <div id='password-employment-details' class='w-1/2 ml-2'>
-                        <p class='text-md my-1'>Password:</p>
+                        <p class='text-md'>Password:</p>
                         <input type='text' id='password-details-input' name='password-details-input' value='manager1pass' class='my-1 px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
                     </div>
                 </div>
                 <div id='employment-details-bottom' class='flex'>
                     <div id='salary-employment-details' class='w-1/2 mr-2'>
-                        <p class='text-md my-1'>Salary:</p>
+                        <p class='text-md'>Salary (₱):</p>
                         <input type='number' id='salary-details-input' name='salary-details-input' value='100000' class='w-full my-1 px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
                     </div>
                     <div id='employee-employment-details' class='w-1/2 ml-2'>
-                        <p class='text-md my-1'>Bonus%/ManagerID:</p>
-                        <input type='number' id='employee-details-input' name='employee-details-input' value='10' class='w-full my-1 px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
+                        <p id='extra-details-label' class='text-md'>Bonus%/ManagerID:</p>
+                        <input type='number' id='extra-details-input' name='employee-details-input' value='10' step='0.01' class='w-full my-1 px-3 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-amber-500'>
                     </div>
                 </div>
             </div>
+
+            <button type='submit' id='confirm-edit-button' class='w-full cursor-pointer font-medium mt-2 px-6 py-2 bg-amber-500 text-white rounded-md hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-opacity-50'>Edit</button>
         </div>
-    </div>";
-    
-    "<div id='logout-confirmation' class='hidden fixed inset-0 flex items-center justify-center z-50' style='background-color: rgba(0, 0, 0, 0.5);'>
-        <div class='bg-white rounded-lg p-4 shadow-lg w-60'>
-            <h2 class='text-md font-semibold mb-2 text-center'>Confirm Logout</h2>
-            <div class='flex justify-end space-x-2 text-center'>
-                <button id='cancel-logout' class='px-6 py-2 rounded bg-gray-300 hover:bg-gray-400'>Cancel</button>
-                <button id='confirm-logout' class='px-6 py-2 rounded bg-amber-500 text-white hover:bg-amber-600'>Log Out</button>
-            </div>
-        </div>
+    </form>
     </div>";
 } else {
     echo "No results found.";

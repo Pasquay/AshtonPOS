@@ -24,9 +24,9 @@ VALUES
 -- insert into staff table
 INSERT INTO `staff` (staff_id, manager_id)
 VALUES
-    (3, 1),
-    (4, 1),
-    (5, 2);
+    (3, 2),
+    (4, 2),
+    (5, 3);
 
 -- insert into manager_payroll table (salary is fetched from employees and is paid == 0)
 INSERT INTO `manager_payroll` (manager_id)

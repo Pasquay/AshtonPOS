@@ -1,5 +1,4 @@
 1. finish the employee management content
     1.1 finish the delete confirmation
-    1.2 add the view button function
-    1.3 Make the view employee thing functional 
+    1.2 finish update-employee-info.php
 2. T_T profile pics for employees ATAYYYYY
