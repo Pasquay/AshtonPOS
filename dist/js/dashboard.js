@@ -127,6 +127,8 @@ function attachEmployeeButtonListeners(){
 
 //Loads Employee Information Card
 function loadEmployeeInformation(employeeId, position){
+    const managerTable = document.getElementById('manager-table');
+    const staffTable = document.getElementById('staff-table');
     const employeeInfoCard = document.getElementById('employee-information');
 
     if(employeeInfoCard.classList.contains("hidden")){ //if no active, show card
@@ -135,22 +137,9 @@ function loadEmployeeInformation(employeeId, position){
         fetch(`../src/controllers/load-employee-info.php?employeeId=${employeeId}&position=${position}`)
             .then(response => response.json())
             .then(data => {
-                //update employee info
-                console.log(data);
-                document.getElementById('name-details-input').value = data.name;
-                document.getElementById('employeeId-details-input').value = data.employee_id;
-                document.getElementById('position-details-input').value = position;
-                document.getElementById('gender-details-input').value = data.gender;
-                document.getElementById('isActive-details-input').value = data.is_active;
-                document.getElementById('address-details-input').value = data.address;
-                document.getElementById('email-details-input').value = data.email;
-                document.getElementById('birthDate-details-input').value = data.birth_date;
-                document.getElementById('contactNumber-details-input').value = data.contact_number;
-                document.getElementById('hireDate-details-input').value = data.hire_date;
-                document.getElementById('password-details-input').value = data.password_text;
-                document.getElementById('salary-details-input').value = data.salary;
-                document.getElementById('extra-details-label').textContent = (position==="Manager") ? "Bonus Percentage:" : "Manager ID:";
-                document.getElementById('extra-details-input').value = (position==="Manager") ? data.bonus_percentage : data.manager_id;
+                updateEmployeeInfoCard(data, position);
+                updateTableLayout(managerTable);
+                updateTableLayout(staffTable);
             })
             .catch(error => console.error("Error: ", error));
     } else if (activeViewId != employeeId){ //else if activeId != pressedId then update the card
@@ -158,7 +147,9 @@ function loadEmployeeInformation(employeeId, position){
         fetch(`../src/controllers/load-employee-info.php?employeeId=${employeeId}&position=${position}`)
             .then(response => response.json())
             .then(data => {
-                //update employee info
+                updateEmployeeInfoCard(data, position);
+                updateTableLayout(managerTable);
+                updateTableLayout(staffTable);
             })
             .catch(error => console.error("Error: ", error));
     }
@@ -166,4 +157,23 @@ function loadEmployeeInformation(employeeId, position){
         employeeInfoCard.classList.add("hidden");
         activeViewId = null;
     }
+}
+function updateEmployeeInfoCard(data, position){
+    document.getElementById('name-details-input').value = data.name;
+    document.getElementById('employeeId-details-input').value = data.employee_id;
+    document.getElementById('position-details-input').value = position;
+    document.getElementById('gender-details-input').value = data.gender;
+    document.getElementById('isActive-details-input').value = data.is_active;
+    document.getElementById('address-details-input').value = data.address;
+    document.getElementById('email-details-input').value = data.email;
+    document.getElementById('birthDate-details-input').value = data.birth_date;
+    document.getElementById('contactNumber-details-input').value = data.contact_number;
+    document.getElementById('hireDate-details-input').value = data.hire_date;
+    document.getElementById('password-details-input').value = data.password_text;
+    document.getElementById('salary-details-input').value = data.salary;
+    document.getElementById('extra-details-label').textContent = (position==="Manager") ? "Bonus Percentage:" : "Manager ID:";
+    document.getElementById('extra-details-input').value = (position==="Manager") ? data.bonus_percentage : data.manager_id;
+}
+function updateTableLayout(table){
+    //lets do this tomorrow!
 }

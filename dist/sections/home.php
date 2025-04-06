@@ -27,7 +27,8 @@ session_start();
     }
 
 //overall container opening tag
-echo "<div class='flex flex-row w-full'>";
+echo "<div class='flex flex-row w-full'>
+        <div class='flex flex-col w-full'>";
 
 //if owner, display manager records
 if($_SESSION['employee_type'] === 'Owner'){
@@ -56,11 +57,11 @@ if($_SESSION['employee_type'] === 'Owner'){
         $result = $stmt->get_result();
     if($result->num_rows > 0){
         //echo table header
-            echo "<div class='flex flex-col w-full'>
-            <h1 class='font-medium p-2 mx-4'>Managers</h1>
-            <div class='bg-white shadow-lg p-4 mx-4'>
-            <table class='border border-amber-500 bg-white w-full'>
-                <thead class='border-amber-500 border bg-amber-500 w-full'>
+            echo "<h1 class='font-medium p-2 mx-4'>Managers</h1>
+            <div class='bg-white shadow-lg p-4 mx-4 rounded-md'>
+            <div class='border border-amber-500 rounded-md overflow-hidden mt-1'>
+            <table id='manager-table' class='border-collapse w-full text-left'>
+                <thead class='bg-amber-500 text-white rounded-t-md'>
                     <tr>
                         <th class='text-white text-center py-1 px-0.5'>ID</th>
                         <th class='text-white text-left py-1 pl-1 w-2/10'>Name</th>
@@ -75,6 +76,7 @@ if($_SESSION['employee_type'] === 'Owner'){
                 </thead>
                 <tbody>";
         
+        $trCount = 0;
         while($row = $result->fetch_assoc()){
             //variables
                 $employeeId = $row["employee_id"];
@@ -120,9 +122,11 @@ if($_SESSION['employee_type'] === 'Owner'){
                         $isActiveClass = "rounded-sm bg-gray-100 text-gray-600 text-sm px-3 py-0.5";
                         break;
                 }
+                $trBgColor = (($trCount)%2===0) ? "white" : "#f6f6f6";
+                $trCount++;
             
             //echo table data
-                echo "<tr>
+                echo "<tr style='background-color: $trBgColor;'>
                 <td class='text-center py-1'>$employeeId</td>
                 <td class='text-left py-1 pl-2'>$name</td>
                 <td class='text-center py-1'><span class='$genderClass'>$gender</span></td>
@@ -137,7 +141,7 @@ if($_SESSION['employee_type'] === 'Owner'){
                 </td>
                 </tr>";
         }
-        echo "</tbody></table></div>"; //close table
+        echo "</tbody></table></div></div>"; //close table
     } else {
         echo "No results found.";
     }    
@@ -171,9 +175,10 @@ if($_SESSION['employee_type'] === 'Owner'){
 if($result->num_rows > 0){
     //echo table header
         echo "<h1 class='font-medium p-2 mx-4'>Employees</h1>
-            <div class='bg-white shadow-lg p-4 mx-4'>
-            <table class='border border-amber-500 bg-white w-full'>
-                <thead class='border-amber-500 border bg-amber-500 w-full'>
+            <div class='bg-white shadow-lg p-4 mx-4 rounded-md'>
+            <div class='border border-amber-500 rounded-md overflow-hidden mt-1'>
+            <table id='staff-table' class='border-collapse w-full text-left'>
+                <thead class='bg-amber-500 text-white rounded-t-md'>
                     <tr>
                         <th class='text-white text-center py-1 px-0.5'>ID</th>
                         <th class='text-white text-left py-1 pl-1 w-2/10'>Name</th>
@@ -188,6 +193,7 @@ if($result->num_rows > 0){
                 </thead>
                 <tbody>";
 
+    $trCount = 0;
     while($row = $result->fetch_assoc()){
         //variables
             $employeeId = $row["employee_id"];
@@ -232,9 +238,11 @@ if($result->num_rows > 0){
                     $isActiveClass = "rounded-sm bg-gray-100 text-gray-600 text-sm px-3 py-0.5";
                     break;
             }
+            $trBgColor = (($trCount)%2===0) ? "white" : "#f6f6f6";
+            $trCount++;
 
         //echo table data
-            echo "<tr>
+            echo "<tr style='background-color: $trBgColor;'>
                 <td class='text-center py-1'>$employeeId</td>
                 <td class='text-left py-1 pl-2'>$name</td>
                 <td class='text-center py-1'><span class='$genderClass'>$gender</span></td>
@@ -249,10 +257,10 @@ if($result->num_rows > 0){
                 </td>
                 </tr>";
     }
-    echo "</body></table></div></div>"; //close table
+    echo "</body></table></div></div></div>"; //close table
 
     //employee information
-    echo "<div id='employee-information' class='hidden bg-white p-4 shadow-lg w-1/2 mr-4'>
+    echo "<div id='employee-information' class='hidden bg-white p-4 shadow-lg rounded-md w-1/2 mr-4'>
     <form id='employee-info-form' action='../src/controllers/update-employee-info.php' method='POST'>
         <div id='header-info' class='flex'>
             <div id='header-details-name' class='w-full'>

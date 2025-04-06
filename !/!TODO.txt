@@ -1,4 +1,7 @@
 1. finish the employee management content
     1.1 finish the delete confirmation
     1.2 finish update-employee-info.php
+    1.3 transition the manager & staff tables when clicking view button
+        -maybe removing email/contact no
+        -updateTableLayout() on dashboard.js bottom
 2. T_T profile pics for employees ATAYYYYY
