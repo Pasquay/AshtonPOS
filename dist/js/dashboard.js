@@ -127,10 +127,10 @@ function attachEmployeeButtonListeners(){
 
 //Loads Employee Information Card
 function loadEmployeeInformation(employeeId, position){
-    const managerTable = document.getElementById('manager-table');
-    const staffTable = document.getElementById('staff-table');
     const employeeInfoCard = document.getElementById('employee-information');
-
+    const staffTable = document.getElementById('staff-table');
+    const managerTable = document.getElementById('manager-table');
+    
     if(employeeInfoCard.classList.contains("hidden")){ //if no active, show card
         employeeInfoCard.classList.remove("hidden");
         activeViewId = employeeId;
@@ -155,6 +155,8 @@ function loadEmployeeInformation(employeeId, position){
     }
     else { //else hide the card
         employeeInfoCard.classList.add("hidden");
+        resetTableLayout(managerTable);
+        resetTableLayout(staffTable);
         activeViewId = null;
     }
 }
@@ -175,5 +177,47 @@ function updateEmployeeInfoCard(data, position){
     document.getElementById('extra-details-input').value = (position==="Manager") ? data.bonus_percentage : data.manager_id;
 }
 function updateTableLayout(table){
-    //lets do this tomorrow!
+    const rows = table.rows;
+    for(let i=0; i<rows.length; i++){
+        //[ID] shrink width
+        rows[i].cells[0].classList.add('w-6');
+        
+        //[Gender] change <td> Non-Binary to NB
+        if (rows[i].cells[2].textContent === "Non-Binary"){
+            const span = rows[i].cells[2].querySelector('span');
+            span.textContent = "NB";
+        }
+        rows[i].cells[2].classList.remove('w-1/12');
+        rows[i].cells[2].classList.add('w-2/12');
+
+        //hiding email
+        rows[i].cells[3].style.display = "none";
+        
+        //[Active] Adjust Width
+        rows[i].cells[7].classList.remove('w-24');
+        rows[i].cells[7].classList.add('w-20');
+    }
+}
+function resetTableLayout(table){
+    const rows = table.rows
+    for(let i=0; i<rows.length; i++){
+        //[ID] widen width
+        rows[i].cells[0].classList.remove('w-6');
+
+        //[Name] adjust width
+        // rows[i].cells[1].
+
+        //[Gender] change <td> Non-Binary to NB
+        if (rows[i].cells[2].textContent === "NB") {
+            const span = rows[i].cells[2].querySelector('span');
+            span.textContent = "Non-Binary";
+        }
+
+        //show email
+        rows[i].cells[3].style.display = "table-cell";
+        
+        //[Active] Adjust Width
+        rows[i].cells[7].classList.remove('w-20');
+        rows[i].cells[7].classList.add('w-24');
+    }
 }

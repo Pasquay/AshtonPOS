@@ -63,7 +63,7 @@ if($_SESSION['employee_type'] === 'Owner'){
             <table id='manager-table' class='border-collapse w-full text-left'>
                 <thead class='bg-amber-500 text-white rounded-t-md'>
                     <tr>
-                        <th class='text-white text-center py-1 px-0.5'>ID</th>
+                        <th class='text-white text-center py-1 pl-1'>ID</th>
                         <th class='text-white text-left py-1 pl-1 w-2/10'>Name</th>
                         <th class='text-white text-center py-1 w-1/12'>Gender</th>
                         <th class='text-white text-left py-1 pl-2'>Email</th>
@@ -71,7 +71,7 @@ if($_SESSION['employee_type'] === 'Owner'){
                         <th class='text-white text-right w-36 pr-6'>Salary (PHP)</th>
                         <th class='text-white text-center w-20'>Bonus %</th>
                         <th class='text-white text-center w-24'>Active</th>
-                        <th class='text-white text-center w-20'>Actions</th>
+                        <th class='text-white w-20 pl-2'>Actions</th>
                     </tr>
                 </thead>
                 <tbody>";
@@ -127,7 +127,7 @@ if($_SESSION['employee_type'] === 'Owner'){
             
             //echo table data
                 echo "<tr style='background-color: $trBgColor;'>
-                <td class='text-center py-1'>$employeeId</td>
+                <td class='text-center pl-1'>$employeeId</td>
                 <td class='text-left py-1 pl-2'>$name</td>
                 <td class='text-center py-1'><span class='$genderClass'>$gender</span></td>
                 <td class='text-left py-1 pl-1'>$email</td>
@@ -135,7 +135,7 @@ if($_SESSION['employee_type'] === 'Owner'){
                 <td class='text-right pr-6'>₱ $formattedSalary</td>
                 <td class='text-center py-1'>$formattedBonusPercentage%</td>
                 <td class='text-center py-1'><span class='$isActiveClass'>$formattedIsActive</span></td>
-                <td class='flex justify-end items-center pr-1.5'>
+                <td class='flex items-center pl-2'>
                     <button id='view-button-$employeeId-$position' class='mx-1 my-1.5 cursor-pointer'><img src='icons/view.png' alt='View' class='h-5 w-auto transition-transform duration-200 hover:scale-110' alt='Expand'></button>
                     <button id='delete-button-$employeeId' class='mx-1 mr-2 cursor-pointer'><img src='icons/delete.png' alt='Delete' class='h-5 w-auto transition-transform duration-200 hover:scale-110' alt='Delete'></button>
                 </td>
@@ -180,7 +180,7 @@ if($result->num_rows > 0){
             <table id='staff-table' class='border-collapse w-full text-left'>
                 <thead class='bg-amber-500 text-white rounded-t-md'>
                     <tr>
-                        <th class='text-white text-center py-1 px-0.5'>ID</th>
+                        <th class='text-white text-center py-1 pl-1'>ID</th>
                         <th class='text-white text-left py-1 pl-1 w-2/10'>Name</th>
                         <th class='text-white text-center py-1 w-1/12'>Gender</th>
                         <th class='text-white text-left py-1 pl-2'>Email</th>
@@ -188,7 +188,7 @@ if($result->num_rows > 0){
                         <th class='text-white text-right w-36 pr-6'>Salary (PHP)</th>
                         <th class='text-white text-center w-20'>MGR ID</th>
                         <th class='text-white text-center w-24'>Active</th>
-                        <th class='text-white text-center w-20'>Actions</th>
+                        <th class='text-white w-20 pl-2'>Actions</th>
                     </tr>
                 </thead>
                 <tbody>";
@@ -243,7 +243,7 @@ if($result->num_rows > 0){
 
         //echo table data
             echo "<tr style='background-color: $trBgColor;'>
-                <td class='text-center py-1'>$employeeId</td>
+                <td class='text-center pl-1'>$employeeId</td>
                 <td class='text-left py-1 pl-2'>$name</td>
                 <td class='text-center py-1'><span class='$genderClass'>$gender</span></td>
                 <td class='text-left py-1 pl-1'>$email</td>
@@ -251,7 +251,7 @@ if($result->num_rows > 0){
                 <td class='text-right pr-6'>₱ $formattedSalary</td>
                 <td class='text-center py-1'>$managerId</td>
                 <td class='text-center py-1'><span class='$isActiveClass'>$formattedIsActive</span></td>
-                <td class='flex justify-end items-center pr-1.5'>
+                <td class='flex items-center pl-2'>
                     <button id='view-button-$employeeId-$position' class='mx-1 my-1.5 cursor-pointer'><img src='icons/view.png' alt='View' class='h-5 w-auto transition-transform duration-200 hover:scale-110' alt='Expand'></button>
                     <button id='delete-button-$employeeId' class='mx-1 mr-2 cursor-pointer'><img src='icons/delete.png' alt='Delete' class='h-5 w-auto transition-transform duration-200 hover:scale-110' alt='Delete'></button>
                 </td>
