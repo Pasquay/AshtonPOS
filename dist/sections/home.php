@@ -261,7 +261,7 @@ if($result->num_rows > 0){
 
     //employee information
     echo "<div id='employee-information' class='hidden bg-white p-4 shadow-lg rounded-md w-1/2 mr-4'>
-    <form id='employee-info-form' action='../src/controllers/update-employee-info.php' method='POST'>
+    <form id='employee-info-form'>
         <div id='header-info' class='flex'>
             <div id='header-details-name' class='w-full'>
                 <p class='text-md font-semibold'>Name</p>

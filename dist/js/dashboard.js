@@ -80,11 +80,12 @@ function loadContent(content) {
 }
 
 
-//Employee vsection button functions
+//Employee section button functions
 let activeViewButton = null;
 let activeViewId = null;
 
 function attachEmployeeButtonListeners(){
+    //view button event listeners
     document.querySelectorAll('[id^="view-button-"]').forEach((button) => {
         button.dataset.state = "off";
         button.addEventListener("click", () => {
@@ -110,6 +111,45 @@ function attachEmployeeButtonListeners(){
         })
     })
 
+    //edit button event listeners
+    const employeeForm = document.getElementById('employee-info-form');
+    employeeForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(employeeForm);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        fetch('../src/controllers/update-employee-info.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if(!response.ok){
+                throw new Error("Cant fetch data");
+            }
+            return response.json();
+        })
+        .then(data => {
+            if(data.success){
+                updateEmployeeInfoCard(data.data, data.position);
+                alert('Successfully updated employee information');
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert('Failed to update employee information.');
+        });
+    })
+
+    //delete button event listeners
     document.querySelectorAll('[id^="delete-button-"]').forEach((button) => {
         button.dataset.state = "off";
         button.addEventListener("click", () => {
